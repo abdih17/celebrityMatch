@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 import DashboardContainer from '../dashboard-container'
+import PictureDisplay from '../picture-display'
 
 class App extends React.Component{
   render(){
@@ -9,6 +10,7 @@ class App extends React.Component{
       <div>
         <h1> Hello World </h1>
         <DashboardContainer />
+        <PictureDisplay />
       </div>
     )
   }
