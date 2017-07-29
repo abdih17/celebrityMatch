@@ -5,15 +5,18 @@ import {
   pictureReset,
 } from '../../action/picture-action.js'
 
-class PictureDisplay extends React.Component{
+import PictureItem from '../picture-item'
+
+class PictureList extends React.Component{
 
   render(){
     return (
       <div>
-        <h3>Picture List</h3>
+        <h3>Pictures</h3>
+        <PictureItem />
       </div>
     )
   }
 }
 
-export default PictureDisplay
+export default PictureList
