@@ -5,6 +5,13 @@
   "repository": "https://github.com/abdih17/celebrityMatch.git",
   "author": "Hawa Abdi <abdih17@hotmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --coverage",
+    "test-watch": "jest --watchAll",
+    "lint": "eslint .",
+    "build": "webpack",
+    "watch": "webpack-dev-server --inline --hot"
+  },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
@@ -26,6 +33,7 @@
     "sass-loader": "^6.0.6",
     "superagent": "^3.5.2",
     "uuid": "^3.1.0",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
   }
 }

@@ -1,7 +1,8 @@
-'use strict';
+'use strict'
+// important webpack concepts entry output plugins loaders
 
-const HTMLPlugin = require('html-webpack-plugin');
-const ExtractPlugin = require('extract-text-webpack-plugin');
+const HTMLPlugin = require('html-webpack-plugin')
+const ExtractPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -21,49 +22,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: '/\.js$/',
-        exclude: '/node_modules/',
-        loader: 'babel-loader'
+        test:  /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
       {
-        test: '/\.css$/',
+        test: /\.scss$/,
         loader: ExtractPlugin.extract(['css-loader', 'sass-loader']),
       },
-      {
-        test: /\.(woff|woff2|ttf|eot|glyph\.svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              name: 'font/[name].[ext]',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(jpg|jpeg|gif|png|tiff|svg)$/,
-        exclude: /\.glyph.svg/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 60000,
-              name: 'image/[name].[ext]',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(mp3|aac|aiff|wav|flac|m4a|ogg)$/,
-        exclude: /\.glyph.svg/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'audio/[name].[ext]' },
-          },
-        ],
-      },
-    ]
-  }
+    ],
+  },
 }
