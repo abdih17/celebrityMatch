@@ -4,17 +4,20 @@ const HTMLPlugin = require('html-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: eval,
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   entry: `${__dirname}/src/main.js`,
   output: {
-    path: `${__dirname}/src/build`,
-    fileName: 'bundle-[hash].js',
-    publicPath: '/'
-  }
-  plugin: {
-    new HTMLPlugin({ template: `${__dirname}/src/index.html` });
-    new ExtractPlugin('bundle-[hash].css')
-  }
+    publicPath: '/',
+    path: `${__dirname}/build`,
+    filename: 'bundle-[hash].js',
+  },
+  plugins: [
+    new ExtractPlugin('bundle-[hash].css'),
+    new HTMLPlugin({template: `${__dirname}/src/index.html`}),
+  ],
   module: {
     rules: [
       {
