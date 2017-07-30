@@ -22,6 +22,7 @@ class PictureItem extends React.Component{
         'jon', 'orlando', 'liam',
       ],
       random: false,
+      buttonText: 'Randomly Generate a Celebrity',
     }
 
     this.renderImage = this.renderImage.bind(this)
@@ -33,28 +34,29 @@ class PictureItem extends React.Component{
   }
 
   renderImage() {
-    // console.log('IMAGEEEEEEEE: ', typeof imageUrl)
     console.log('hello')
-    leftIndex = parseInt(this.getRandomNumber(1, 20))
+    leftIndex = parseInt(this.getRandomNumber(0, 20))
     console.log(this.state.imagesArray[leftIndex])
-    centerIndex = parseInt(this.getRandomNumber(1, 20))
+    centerIndex = parseInt(this.getRandomNumber(0, 20))
     console.log(this.state.imagesArray[centerIndex])
-    rightIndex = parseInt(this.getRandomNumber(1, 20))
+    rightIndex = parseInt(this.getRandomNumber(0, 20))
     console.log(this.state.imagesArray[rightIndex])
 
     return (
       <div>
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[leftIndex] + '.png')} />
-        </li>
+        <ul>
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[leftIndex] + '.png')} />
+          </li>
 
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[centerIndex] + '.png')} />
-        </li>
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[centerIndex] + '.png')} />
+          </li>
 
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[rightIndex] + '.png')} />
-        </li>
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[rightIndex] + '.png')} />
+          </li>
+        </ul>
       </div>
     )
   }
@@ -65,9 +67,9 @@ class PictureItem extends React.Component{
       <div className="gallery">
         <h5>THESE IS THE IMAGES</h5>
         <div className="images-container">
-          <ul>
-            {this.state.imagesArray.map(() => this.renderImage())}
-          </ul>
+          {console.log(this)}
+          <button onClick={this.renderImage}> {this.state.buttonText} </button>
+          
         </div>
       </div>
     )
