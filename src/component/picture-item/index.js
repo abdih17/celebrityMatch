@@ -5,55 +5,69 @@ import {
   pictureReset,
 } from '../../action/picture-action.js'
 
-let urls = [
-  '../images/charles.png',
-  '../images/chris.jpg',
-  '../images/chrisP.png',
-  '../images/chrisPR.png',
-  '../images/david.png',
-  '../images/greyworm.png',
-  '../images/jason.png',
-  '../images/jessie.png',
-  '../images/jon.png',
-  '../images/kofi.png',
-  '../images/liam.png',
-  '../images/orlando.png',
-  '../images/richard.png',
-  '../images/robert.png',
-  '../images/ryanG.png',
-  '../images/ryanR.png',
-  '../images/taylor.png',
-  '../images/zac.png',
-  '../images/zayn.png',
-]
+let counter = 0
+let rightIndex = 0
+let leftIndex = 0
+let centerIndex = 0
 
 class PictureItem extends React.Component{
   constructor(props){
     super(props)
 
     this.state = {
-      imageURLs: ['chris.jpg', 'zayn.png', 'zac.png'],
+      imagesArray: [
+        'chrisH', 'zayn', 'lance' ,'zac', 'chrisPR', 'david',
+        'taylor', 'kofi', 'ryanR', 'chrisP', 'charles', 'greyworm',
+        'ryanG', 'jason', 'don', 'robert', 'jessie', 'richard',
+        'jon', 'orlando', 'liam',
+      ],
+      random: false,
     }
 
     this.renderImage = this.renderImage.bind(this)
+    this.getRandomNumber = this.getRandomNumber.bind(this)
   }
 
-  renderImage(imageUrl) {
-    console.log('IMAGEEEEEEEE: ', typeof imageUrl)
-    console.log('IMAGE*******: ', imageUrl)
+  getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  renderImage() {
+    // console.log('IMAGEEEEEEEE: ', typeof imageUrl)
+    console.log('hello')
+    leftIndex = parseInt(this.getRandomNumber(1, 20))
+    console.log(this.state.imagesArray[leftIndex])
+    centerIndex = parseInt(this.getRandomNumber(1, 20))
+    console.log(this.state.imagesArray[centerIndex])
+    rightIndex = parseInt(this.getRandomNumber(1, 20))
+    console.log(this.state.imagesArray[rightIndex])
+
     return (
       <div>
-        <img src={require('../images/' + imageUrl)} />
+        <li>
+          <img src={require('../images/' + this.state.imagesArray[leftIndex] + '.png')} />
+        </li>
+
+        <li>
+          <img src={require('../images/' + this.state.imagesArray[centerIndex] + '.png')} />
+        </li>
+
+        <li>
+          <img src={require('../images/' + this.state.imagesArray[rightIndex] + '.png')} />
+        </li>
       </div>
     )
   }
 
   render() {
+    console.log(this)
     return (
       <div className="gallery">
         <h5>THESE IS THE IMAGES</h5>
-        <div className="images">
-          {this.state.imageURLs.map(imageUrl => this.renderImage(imageUrl))}
+        <div className="images-container">
+          <ul>
+            {this.state.imagesArray.map(() => this.renderImage())}
+          </ul>
         </div>
       </div>
     )
