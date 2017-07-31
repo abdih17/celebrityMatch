@@ -9,7 +9,7 @@ let counter = 0
 let rightIndex = 0
 let leftIndex = 0
 let centerIndex = 0
-let currentImages = []
+var currentImage = []
 
 class PictureItem extends React.Component{
   constructor(props){
@@ -22,67 +22,92 @@ class PictureItem extends React.Component{
         'ryanG', 'jason', 'don', 'robert', 'jessie', 'richard',
         'jon', 'orlando', 'liam',
       ],
-      buttonText: 'Generate a Hottie',
+      urlImageArray: [],
       random: false,
-      currentImages: [],
     }
 
-    this.renderImage = this.renderImage.bind(this)
+    // this.renderImage = this.renderImage.bind(this)
     this.getRandomNumber = this.getRandomNumber.bind(this)
-    this.imagesOnDom = this.imagesOnDom.bind(this)
+    this.makeURLs = this.makeURLs.bind(this)
+    this.randomlyShowImages = this.randomlyShowImages.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    // e.preventDefault()
+
+    console.log('inside event handler')
+    console.log('%%%%%%%%', counter)
+    var imageDiv = document.getElementById('three-images')
+    imageDiv.innerHTML = ''
+    this.randomlyShowImages()
+    console.log('outside of it')
+    // this.state.imagesArray.map((imageName) => {
+    //   if (e.target.src === imageName)
+    // }
+  }
+
+  makeURLs(imageName){
+    this.state.urlImageArray.push('../images/' + imageName + '.png')
+    // console.log('MAKE URLS', this.state)
+    counter++
+    if (counter == this.state.imagesArray.length){
+      console.log('hellllllllllo')
+      this.randomlyShowImages()
+    }
+  }
+
+  randomlyShowImages(imageName) {
+    if(counter < 22) {
+      console.log('inside if statement')
+      this.makeURLs(imageName)
+      console.log('outside if statement')
+    } else if ( counter >= 22 ) {
+      counter = 0
+      this.state.imagesArray.map((imageName) =>
+        this.makeURLs(imageName)
+      )
+    }
+
+    console.log('#$#$#$#$#$', counter)
+    console.log('!!!!!!', this.state.imagesArray.length)
+    if (counter >= 22) {
+      leftIndex = parseInt(this.getRandomNumber(0, 20))
+      currentImage.push(leftIndex)
+      // console.log(this.state.urlImageArray[leftIndex])
+
+      centerIndex = parseInt(this.getRandomNumber(0, 20))
+      currentImage.push(centerIndex)
+      // console.log(this.state.urlImageArray[centerIndex])
+
+      rightIndex = parseInt(this.getRandomNumber(0, 20))
+      currentImage.push(rightIndex)
+      // console.log(this.state.urlImageArray[rightIndex])
+
+      // console.log('&&&&currentImage ARRAY: ', currentImage)
+      console.log('checking this out:', this.state.imagesArray[leftIndex])
+
+      return (
+        <div onClick={this.handleClick}>
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[leftIndex] + '.png')} />
+          </li>
+
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[centerIndex] + '.png')} />
+          </li>
+
+          <li>
+            <img src={require('../images/' + this.state.imagesArray[rightIndex] + '.png')} />
+          </li>
+        </div>
+      )
+    }
   }
 
   getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
-
-  renderImage(imageName, i) {
-    console.log('(((((((((((((((((((((((((((((((((((((((((hello')
-    leftIndex = parseInt(this.getRandomNumber(1, 20))
-    console.log(this.state.imagesArray[leftIndex])
-    centerIndex = parseInt(this.getRandomNumber(1, 20))
-    console.log(this.state.imagesArray[centerIndex])
-    rightIndex = parseInt(this.getRandomNumber(1, 20))
-    console.log(this.state.imagesArray[rightIndex])
-
-    if (leftIndex === centerIndex || centerIndex === rightIndex || leftIndex === rightIndex) {
-      this.state.currentImages = [leftIndex, centerIndex, rightIndex]
-      console.log('??????????????????????????', this)
-      console.log('duplicate caught')
-      this.renderImage()
-    } else {
-      counter++
-      this.state.currentImages = [leftIndex, centerIndex, rightIndex]
-      console.log('**************************', this)
-      // console.log('COUNTER*********************************', counter)
-      return this.imagesOnDom(imageName, i)
-    }
-  }
-
-  imagesOnDom(imageName, i) {
-    // console.log('IMAGENAME= ', imageName)
-    // console.log('KEY I++ ', i)
-    // console.log('COUNTER-------------------------------', counter)
-    return (
-      <div>
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[leftIndex] + '.png')}/>
-          {console.log('LEFTINDEX', this.state.imagesArray[leftIndex])}
-        </li>
-
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[centerIndex] + '.png')}/>
-          {console.log('CENTERINDEX', this.state.imagesArray[centerIndex])}
-        </li>
-
-        <li>
-          <img src={require('../images/' + this.state.imagesArray[rightIndex] + '.png')}/>
-          {console.log('RIGHTINDEX', this.state.imagesArray[rightIndex])}
-        </li>
-      </div>
-    )
-  }
-
 
   render() {
     console.log(this)
@@ -91,8 +116,9 @@ class PictureItem extends React.Component{
         <h5>THESE IS THE IMAGES</h5>
         <div className="images-container">
           <ul>
-            {this.state.imagesArray.map((imageName, i) => {
-              return this.renderImage(imageName, i)
+            {counter = 0}
+            {this.state.imagesArray.map((imageName) => {
+              return this.randomlyShowImages(imageName)
             })}
           </ul>
         </div>
