@@ -116,7 +116,7 @@ class PictureItem extends React.Component{
         <h5>THESE IS THE IMAGES</h5>
         <div className="images-container">
           <ul>
-            {counter = 0}
+            {counter=null}
             {this.state.imagesArray.map((imageName) => {
               return this.randomlyShowImages(imageName)
             })}
