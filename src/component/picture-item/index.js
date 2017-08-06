@@ -1,5 +1,8 @@
 import React from 'react'
 
+// TODO: Consider using Lodash (3rd party module) to shuffle and chunk the array of images.
+// NOTE: Make sure to understand the ins and outs of how it works.
+
 import {
   pictureCreate,
   pictureReset,
